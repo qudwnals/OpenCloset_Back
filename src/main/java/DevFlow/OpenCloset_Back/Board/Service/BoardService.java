@@ -22,10 +22,17 @@ public class BoardService {
     public List<BoardCreateResponsetDto> getPosts(){
         return boardRepository.findAllByOrderByModifiedAtDesc().stream().map(BoardCreateResponsetDto::new).toList();
     }
+
     @Transactional
     public BoardCreateResponsetDto createBoard(BoardCreateRequestDto req){
         Board board = new Board(req);
         boardRepository.save(board);
         return new BoardCreateResponsetDto(board);
+    }
+    @Transactional
+    public BoardCreateResponsetDto getPost(Long id){
+        return boardRepository.findById(id).map(BoardCreateResponsetDto::new).orElseThrow(
+                () -> new IllegalArgumentException("아이디가 존재하지않습니다.")
+        );
     }
 }

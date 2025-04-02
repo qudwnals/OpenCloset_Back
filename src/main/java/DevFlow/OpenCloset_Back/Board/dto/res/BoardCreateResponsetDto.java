@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 public class BoardCreateResponsetDto {
     private Long id;
     private String title;
-    private String Description;
+    private String description;
     private String image;
     private String size;
     private Boolean sex;
@@ -18,10 +18,10 @@ public class BoardCreateResponsetDto {
     public BoardCreateResponsetDto(Board entity) {
         this.id = entity.getId();
         this.title = entity.getTitle();
-        this.Description = entity.getDescription();
+        this.description = entity.getDescription();
         this.image = entity.getImage();
         this.size = entity.getSize();
-        this.sex = entity.getSex();
+//        this.sex = entity.getSex();
         this.place = entity.getPlace();
     }
 }

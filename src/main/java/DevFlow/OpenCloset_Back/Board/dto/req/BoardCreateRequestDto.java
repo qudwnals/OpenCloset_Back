@@ -5,7 +5,7 @@ import lombok.Getter;
 @Getter
 public class BoardCreateRequestDto {
     private String title;
-    private String Description;
+    private String description;
     private String image;
     private String size;
     private Boolean sex;

@@ -13,12 +13,12 @@ import java.time.LocalDateTime;
 @Getter
 @Entity
 @NoArgsConstructor
-public class Board extends Default { //게시물 id
+public class Board extends Gener { //게시물 id
     @Column(nullable = false)
     private String title;   //제목
 
     @Column(nullable = false)
-    private String Description; //의류에 관한 설명
+    private String description; //의류에 관한 설명
 
     @Column(nullable = false)
     private String image;   //의류 사진 (url로 단순 db 삽입 예정)
@@ -40,7 +40,7 @@ public class Board extends Default { //게시물 id
 
     public Board(BoardCreateRequestDto req){
         this.title = req.getTitle();
-        this.Description = req.getDescription();
+        this.description = req.getDescription();
         this.sex = req.getSex();
         this.image = req.getImage();
         this.size = req.getSize();
