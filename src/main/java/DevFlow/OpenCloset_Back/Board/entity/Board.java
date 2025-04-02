@@ -1,5 +1,6 @@
 package DevFlow.OpenCloset_Back.Board.entity;
 
+import DevFlow.OpenCloset_Back.Board.dto.req.BoardCreateRequestDto;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import lombok.Getter;
@@ -37,6 +38,14 @@ public class Board extends Default { //게시물 id
     @LastModifiedDate
     private LocalDateTime modifiedAt;   //엔티티가 수정된 시간을 자동 저장
 
+    public Board(BoardCreateRequestDto req){
+        this.title = req.getTitle();
+        this.Description = req.getDescription();
+        this.sex = req.getSex();
+        this.image = req.getImage();
+        this.size = req.getSize();
+        this.place = req.getPlace();
+    }
     //회원아이디에 해당하는 FK값도 넣어야함. (회원 로직 구현 시)
     //카테고리에 해당하는 FK값 넣어야함. (아마도..?)
 }
