@@ -1,4 +1,4 @@
-package DevFlow.OpenCloset_Back.entity;
+package DevFlow.OpenCloset_Back.Board.entity;
 
 import jakarta.persistence.*;
 import lombok.Getter;

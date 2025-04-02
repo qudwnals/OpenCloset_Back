@@ -1,4 +1,4 @@
-package DevFlow.OpenCloset_Back.entity;
+package DevFlow.OpenCloset_Back.Board.entity;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -12,7 +12,7 @@ import java.time.LocalDateTime;
 @Getter
 @Entity
 @NoArgsConstructor
-public class Board extends Default{ //게시물 id
+public class Board extends Default { //게시물 id
     @Column(nullable = false)
     private String title;   //제목
 
