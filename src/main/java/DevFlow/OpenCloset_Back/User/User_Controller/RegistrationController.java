@@ -1,10 +1,10 @@
-package DevFlow.OpenCloset_Back.User_Controller;
+package DevFlow.OpenCloset_Back.User.User_Controller;
 
-import DevFlow.OpenCloset_Back.User_Service.UserService;
-import dto.req.UserCreateRequestDto;
-import dto.res.UserResponeDto;
-import lombok.RequiredArgsConstructor;
+import DevFlow.OpenCloset_Back.User.User_Service.UserService;
+import DevFlow.OpenCloset_Back.User.dto.req.UserCreateRequestDto;
+import DevFlow.OpenCloset_Back.User.dto.res.UserResponeDto;
 import org.springframework.http.ResponseEntity;
+import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;

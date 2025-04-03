@@ -7,6 +7,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class OpenClosetBackApplication {
 
 	public static void main(String[] args) {
+
 		SpringApplication.run(OpenClosetBackApplication.class, args);
 	}
 

@@ -1,8 +1,11 @@
-package DevFlow.OpenCloset_Back.Board.entity;
+package DevFlow.OpenCloset_Back.User.entity;
+
+
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.*;
+import lombok.Setter;
 
 @Getter
 @Setter

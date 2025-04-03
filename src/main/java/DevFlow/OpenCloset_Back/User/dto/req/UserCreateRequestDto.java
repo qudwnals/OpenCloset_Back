@@ -1,4 +1,5 @@
-package DevFlow.OpenCloset_Back.Board.dto.req;
+package DevFlow.OpenCloset_Back.User.dto.req;
+
 import lombok.Getter;
 import lombok.Setter;
 
@@ -13,3 +14,5 @@ public class UserCreateRequestDto {
     private String age;
 
 }
+
+

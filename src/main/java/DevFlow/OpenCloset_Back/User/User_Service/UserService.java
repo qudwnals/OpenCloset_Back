@@ -1,9 +1,9 @@
-package DevFlow.OpenCloset_Back.User_Service;
+package DevFlow.OpenCloset_Back.User.User_Service;
 
-import DevFlow.OpenCloset_Back.UserRepository;
-import DevFlow.OpenCloset_Back.entity.User;
-import dto.req.UserCreateRequestDto;
-import dto.res.UserResponeDto;
+import DevFlow.OpenCloset_Back.User.User_Repository.UserRepository;
+import DevFlow.OpenCloset_Back.User.dto.req.UserCreateRequestDto;
+import DevFlow.OpenCloset_Back.User.dto.res.UserResponeDto;
+import DevFlow.OpenCloset_Back.User.entity.User;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -37,4 +37,3 @@ public class UserService {
                 user.getAge());
     }
 }
-

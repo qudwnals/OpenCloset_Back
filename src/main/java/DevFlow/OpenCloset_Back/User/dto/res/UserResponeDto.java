@@ -1,4 +1,6 @@
-package DevFlow.OpenCloset_Back.Board.dto.res;
+package DevFlow.OpenCloset_Back.User.dto.res;
+
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 
