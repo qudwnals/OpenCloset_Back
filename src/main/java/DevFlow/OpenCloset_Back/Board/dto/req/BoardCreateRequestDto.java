@@ -10,4 +10,5 @@ public class BoardCreateRequestDto {
     private String size;
     private Boolean sex;
     private String place;
+
 }
