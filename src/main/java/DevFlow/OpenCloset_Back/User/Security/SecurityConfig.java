@@ -18,9 +18,10 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
-                .csrf(csrf -> csrf.disable())  // CSRF 보안 비활성화 (POST 요청 허용)
+                .csrf(csrf -> csrf.disable())// CSRF 보안 비활성화 (POST 요청 허용)
+                .formLogin(form -> form.disable())
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/auth/register").permitAll()  // 회원가입은 인증 없이 접근 가능
+                        .requestMatchers("/auth/register","/auth/login","/auth/logout").permitAll()  // 회원가입은 인증 없이 접근 가능
                         .anyRequest().authenticated()  // 그 외 요청은 인증 필요
                 );
 

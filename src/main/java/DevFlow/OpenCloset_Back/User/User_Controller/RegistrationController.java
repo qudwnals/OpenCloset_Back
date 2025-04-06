@@ -27,10 +27,5 @@ public class RegistrationController {
         UserResponeDto responseDto = userService.registerUser(requestDto);
         return ResponseEntity.ok(responseDto);
     }
-        @PostMapping("/login")
-        public ResponseEntity<LoginResponseDto> login(@RequestBody LoginRequestDto requestDto) {
-            LoginResponseDto responseDto = userService.loginUser(requestDto);
-            return ResponseEntity.ok(responseDto);
 
-    }
 }
