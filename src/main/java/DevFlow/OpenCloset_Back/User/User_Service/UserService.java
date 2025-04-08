@@ -2,6 +2,7 @@ package DevFlow.OpenCloset_Back.User.User_Service;
 
 import DevFlow.OpenCloset_Back.Login.Dto.req.LoginRequestDto;
 import DevFlow.OpenCloset_Back.Login.Dto.res.LoginResponseDto;
+import DevFlow.OpenCloset_Back.Login.Jwt_Util.JwtUtil;
 import DevFlow.OpenCloset_Back.User.User_Repository.UserRepository;
 import DevFlow.OpenCloset_Back.User.dto.req.UserCreateRequestDto;
 import DevFlow.OpenCloset_Back.User.dto.res.UserResponeDto;
@@ -40,14 +41,29 @@ public class UserService {
                 user.getName(),
                 user.getAge());
     }
+
     public LoginResponseDto loginUser(LoginRequestDto requestDto) {
         Optional<User> optionalUser = userRepository.findByUsername(requestDto.getUsername());
+
         if (optionalUser.isPresent()) {
             User user = optionalUser.get();
+
             if (passwordEncoder.matches(requestDto.getPassword(), user.getPassword())) {
-                return new LoginResponseDto("Login successful", user.getUsername(), user.getName());
+                String token = JwtUtil.generateToken(user.getUsername());
+
+                return new LoginResponseDto(
+                        user.getUsername(),
+                        user.getName(),
+                        "Login successful",
+                        token
+                );
             }
         }
-        return new LoginResponseDto("Invalid username or password", null, null);
+        return new LoginResponseDto(
+                null,
+                null,
+                "Invalid username or password",
+                null
+        );
     }
 }
