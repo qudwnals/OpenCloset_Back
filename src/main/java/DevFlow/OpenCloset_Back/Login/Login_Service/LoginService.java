@@ -2,6 +2,7 @@ package DevFlow.OpenCloset_Back.Login.Login_Service;
 import DevFlow.OpenCloset_Back.Login.Dto.req.LoginRequestDto;
 import DevFlow.OpenCloset_Back.Login.Dto.res.LoginResponseDto;
 import DevFlow.OpenCloset_Back.Login.Jwt_Util.JwtUtil;
+import DevFlow.OpenCloset_Back.Login.RefreshToken.RefreshTokenService;
 import DevFlow.OpenCloset_Back.User.User_Repository.UserRepository;
 import DevFlow.OpenCloset_Back.User.entity.User;
 import jakarta.servlet.http.HttpSession;
@@ -12,11 +13,13 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.Optional;
+import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
 public class LoginService {
     private final UserRepository userRepository;
+    private final RefreshTokenService refreshTokenService;
     private final BCryptPasswordEncoder passwordEncoder;
 
     public LoginResponseDto loginUser(LoginRequestDto requestDto) {
@@ -25,11 +28,14 @@ public class LoginService {
         if (optionalUser.isPresent()) {
             User user = optionalUser.get();
             if (passwordEncoder.matches(requestDto.getPassword(), user.getPassword())) {
+                String accessToken = JwtUtil.generateToken((user.getUsername()));
                 //  JWT 토큰 생성
-                String token = JwtUtil.generateToken(user.getUsername());
+                //String token = JwtUtil.generateToken(user.getUsername());
+                String refreshToken = UUID.randomUUID().toString();
+                refreshTokenService.saveRefreshToken(user.getUsername(), refreshToken);
 
-                //  토큰 포함해서 응답 반환
-                return new LoginResponseDto(user.getUsername(), user.getName(), "Login successful", token);
+                //  토큰 포함해서 응 답 반환
+                return new LoginResponseDto(user.getUsername(), user.getName(), "Login successful", accessToken,refreshToken);
             }
         }
 

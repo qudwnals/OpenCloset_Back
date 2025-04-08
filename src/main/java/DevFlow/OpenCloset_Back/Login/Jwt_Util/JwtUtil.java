@@ -9,21 +9,48 @@ import java.util.Date;
 
 @Component
 public class JwtUtil {
-    private static final String SECRET_KEY = "your-256-bit-secret-your-256-bit-secret"; // 최소 256비트 (32자 이상)
+    private static final String SECRET_KEY = "your-256-bit-secret-your-256-bit-secret"; // 32자 이상 필수
+    private static final long EXPIRATION_TIME = 86400000L; // 24시간
+    private static final long REFRESH_EXPIRATION_TIME = 604800000L; // Refresh Token: 7일
 
-    // 토큰 유효 시간 설정 (예: 1일)
-    private static final long EXPIRATION_TIME = 86400000L; // 24시간 (1 * 60 * 60 * 1000)
+    // 서명 키 생성 메서드
+    private static Key getSigningKey() {
+        return Keys.hmacShaKeyFor(SECRET_KEY.getBytes());
+    }
 
-    // static 메서드로 설정
+    // 토큰 생성
     public static String generateToken(String username) {
         Date now = new Date();
         Date expiryDate = new Date(now.getTime() + EXPIRATION_TIME);
 
         return Jwts.builder()
-                .setSubject(username)         // 사용자 정보 (username)
-                .setIssuedAt(now)             // 발급 시간
-                .setExpiration(expiryDate)    // 만료 시간
-                .signWith(Keys.hmacShaKeyFor(SECRET_KEY.getBytes()), SignatureAlgorithm.HS256) // 서명
+                .setSubject(username)
+                .setIssuedAt(now)
+                .setExpiration(expiryDate)
+                .signWith(getSigningKey(), SignatureAlgorithm.HS256)
                 .compact();
+    }
+
+    // 토큰에서 사용자 이름 추출
+    public static String extractUsername(String token) {
+        return Jwts.parserBuilder()
+                .setSigningKey(getSigningKey())
+                .build()
+                .parseClaimsJws(token)
+                .getBody()
+                .getSubject();
+    }
+
+    // 토큰 유효성 검사
+    public static boolean validateToken(String token) {
+        try {
+            Jwts.parserBuilder()
+                    .setSigningKey(getSigningKey())
+                    .build()
+                    .parseClaimsJws(token);
+            return true;
+        } catch (JwtException | IllegalArgumentException e) {
+            return false;
+        }
     }
 }

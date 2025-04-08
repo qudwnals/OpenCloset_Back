@@ -34,36 +34,10 @@ public class UserService {
         userRepository.save(user);
 
 
-
         return new UserResponeDto(
                 user.getUsername(),
                 user.getAddress(),
                 user.getName(),
                 user.getAge());
-    }
-
-    public LoginResponseDto loginUser(LoginRequestDto requestDto) {
-        Optional<User> optionalUser = userRepository.findByUsername(requestDto.getUsername());
-
-        if (optionalUser.isPresent()) {
-            User user = optionalUser.get();
-
-            if (passwordEncoder.matches(requestDto.getPassword(), user.getPassword())) {
-                String token = JwtUtil.generateToken(user.getUsername());
-
-                return new LoginResponseDto(
-                        user.getUsername(),
-                        user.getName(),
-                        "Login successful",
-                        token
-                );
-            }
-        }
-        return new LoginResponseDto(
-                null,
-                null,
-                "Invalid username or password",
-                null
-        );
     }
 }
