@@ -29,7 +29,7 @@ public class User {
     @Column(nullable = false)
     private String address; // 주소
 
-    @Column(nullable = false)  // 나이 추가
+    @Column(nullable = false)  // 나이
     private String age;
 }
 

@@ -1,4 +1,4 @@
-package DevFlow.OpenCloset_Back.User.Security;
+package DevFlow.OpenCloset_Back.Security;
 
 import DevFlow.OpenCloset_Back.Login.JwtAuthenticationFilter.JwtAuthenticationFilter;
 import org.springframework.context.annotation.Bean;
