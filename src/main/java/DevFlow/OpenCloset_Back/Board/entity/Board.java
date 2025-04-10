@@ -42,6 +42,9 @@ public class Board extends Gener { //게시물 id
     @Column(nullable = false)
     private Number date;
 
+    @Column(nullable = false)
+    private String category;
+
     @CreatedDate
     private LocalDateTime createdAt;    //엔티티가 생성되어 저장될 때 시간을 자동 저장
 
@@ -57,6 +60,7 @@ public class Board extends Gener { //게시물 id
         this.place = req.getPlace();
         this.price = req.getPrice();
         this.date = req.getDate();
+        this.category = req.getCategory();
     }
     //회원아이디에 해당하는 FK값도 넣어야함. (회원 로직 구현 시) , 회원의 이름을 알기 위해서
     //카테고리에 해당하는 FK값 넣어야함. (아마도..?)

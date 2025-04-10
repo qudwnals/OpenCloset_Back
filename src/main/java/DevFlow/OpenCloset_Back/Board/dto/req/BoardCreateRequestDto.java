@@ -12,4 +12,5 @@ public class BoardCreateRequestDto {
     private String place;
     private Number price;
     private Number date;
+    private String category;
 }
