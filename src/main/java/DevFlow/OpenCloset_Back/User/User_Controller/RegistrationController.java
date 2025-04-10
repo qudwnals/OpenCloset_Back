@@ -20,8 +20,6 @@ public class RegistrationController {
 
     private final UserService userService;
 
-
-
     @PostMapping("/register")
     public ResponseEntity<UserResponeDto> registerUser(@RequestBody UserCreateRequestDto requestDto) {
         UserResponeDto responseDto = userService.registerUser(requestDto);
