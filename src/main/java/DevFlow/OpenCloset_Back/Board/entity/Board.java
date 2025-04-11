@@ -3,19 +3,15 @@ package DevFlow.OpenCloset_Back.Board.entity;
 import DevFlow.OpenCloset_Back.Board.dto.req.BoardCreateRequestDto;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.EntityListeners;
-import jakarta.persistence.OneToOne;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
-import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import java.time.LocalDateTime;
 
 @Getter
 @Entity
-@EntityListeners(AuditingEntityListener.class)
 @NoArgsConstructor
 public class Board extends Gener { //게시물 id
     @Column(nullable = false)
@@ -31,25 +27,16 @@ public class Board extends Gener { //게시물 id
     private String size;    //의류 사이즈
 
     @Column(nullable = false)
-    private String sex;    //해당 의류 성별
+    private Boolean sex;    //해당 의류 성별(1 : 남자, 0 : 여자)
 
     @Column(nullable = false)
     private String place;   //거래 장소
-
-    @Column(nullable = false)
-    private Number price;
-
-    @Column(nullable = false)
-    private Number date;
-
-    @Column(nullable = false)
-    private String category;
 
     @CreatedDate
     private LocalDateTime createdAt;    //엔티티가 생성되어 저장될 때 시간을 자동 저장
 
     @LastModifiedDate
-    private LocalDateTime modifiedAt;
+    private LocalDateTime modifiedAt;   //엔티티가 수정된 시간을 자동 저장
 
     public Board(BoardCreateRequestDto req){
         this.title = req.getTitle();
@@ -58,10 +45,7 @@ public class Board extends Gener { //게시물 id
         this.image = req.getImage();
         this.size = req.getSize();
         this.place = req.getPlace();
-        this.price = req.getPrice();
-        this.date = req.getDate();
-        this.category = req.getCategory();
     }
-    //회원아이디에 해당하는 FK값도 넣어야함. (회원 로직 구현 시) , 회원의 이름을 알기 위해서
+    //회원아이디에 해당하는 FK값도 넣어야함. (회원 로직 구현 시)
     //카테고리에 해당하는 FK값 넣어야함. (아마도..?)
 }

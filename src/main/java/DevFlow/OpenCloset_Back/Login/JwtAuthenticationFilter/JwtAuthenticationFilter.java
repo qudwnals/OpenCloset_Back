@@ -1,12 +1,14 @@
 package DevFlow.OpenCloset_Back.Login.JwtAuthenticationFilter;
 
 import DevFlow.OpenCloset_Back.Login.Jwt_Util.JwtUtil;
+import DevFlow.OpenCloset_Back.Security.CustomUserDetailsService;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
@@ -15,6 +17,12 @@ import java.io.IOException;
 
 @Component
 public class JwtAuthenticationFilter extends OncePerRequestFilter {
+
+    private final CustomUserDetailsService customUserDetailsService;
+
+    public JwtAuthenticationFilter(CustomUserDetailsService customUserDetailsService) {
+        this.customUserDetailsService = customUserDetailsService;
+    }
 
     // JwtUtil 메서드들은 static으로 만들었기 때문에 바로 사용 가능
     @Override
@@ -38,13 +46,16 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         // 인증이 안 되어 있으면 인증 객체 생성
         if (username != null && SecurityContextHolder.getContext().getAuthentication() == null) {
             if (JwtUtil.validateToken(token)) {
+                UserDetails userDetails = customUserDetailsService.loadUserByUsername(username);
 
                 UsernamePasswordAuthenticationToken authentication =
-                        new UsernamePasswordAuthenticationToken(username, null, null);
+                        new UsernamePasswordAuthenticationToken(
+                                userDetails, null, userDetails.getAuthorities());
+
                 authentication.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
 
-                // SecurityContext에 인증 정보 저장
                 SecurityContextHolder.getContext().setAuthentication(authentication);
+
             }
         }
 

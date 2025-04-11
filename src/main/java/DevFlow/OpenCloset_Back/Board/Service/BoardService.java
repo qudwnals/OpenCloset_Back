@@ -1,11 +1,9 @@
 package DevFlow.OpenCloset_Back.Board.Service;
 
 import DevFlow.OpenCloset_Back.Board.Repository.BoardRepository;
-import DevFlow.OpenCloset_Back.Board.Repository.TopRepository;
 import DevFlow.OpenCloset_Back.Board.dto.req.BoardCreateRequestDto;
 import DevFlow.OpenCloset_Back.Board.dto.res.BoardCreateResponsetDto;
 import DevFlow.OpenCloset_Back.Board.entity.Board;
-import DevFlow.OpenCloset_Back.Board.entity.Top;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -15,11 +13,9 @@ import java.util.List;
 public class BoardService {
 
     private final BoardRepository boardRepository;
-    private final TopRepository topRepository;
 
-    public BoardService(BoardRepository boardRepository, TopRepository topRepository) {
+    public BoardService(BoardRepository boardRepository) {
         this.boardRepository = boardRepository;
-        this.topRepository = topRepository;
     }
 
     @Transactional(readOnly = true)
@@ -31,10 +27,6 @@ public class BoardService {
     public BoardCreateResponsetDto createBoard(BoardCreateRequestDto req){
         Board board = new Board(req);
         boardRepository.save(board);
-        if (req.getCategory().equals("top")){
-            Top top = new Top(board);
-            topRepository.save(top);
-        }
         return new BoardCreateResponsetDto(board);
     }
     @Transactional

@@ -8,9 +8,6 @@ public class BoardCreateRequestDto {
     private String description;
     private String image;
     private String size;
-    private String sex;
+    private Boolean sex;
     private String place;
-    private Number price;
-    private Number date;
-    private String category;
 }
