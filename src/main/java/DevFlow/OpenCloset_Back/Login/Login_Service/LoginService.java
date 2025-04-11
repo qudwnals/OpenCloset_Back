@@ -1,4 +1,5 @@
 package DevFlow.OpenCloset_Back.Login.Login_Service;
+
 import DevFlow.OpenCloset_Back.Login.Dto.req.LoginRequestDto;
 import DevFlow.OpenCloset_Back.Login.Dto.res.LoginResponseDto;
 import DevFlow.OpenCloset_Back.Login.Jwt_Util.JwtUtil;
@@ -28,22 +29,26 @@ public class LoginService {
         if (optionalUser.isPresent()) {
             User user = optionalUser.get();
             if (passwordEncoder.matches(requestDto.getPassword(), user.getPassword())) {
-                String accessToken = JwtUtil.generateToken((user.getUsername()));
-                //  JWT 토큰 생성
-                //String token = JwtUtil.generateToken(user.getUsername());
+                // 로그인한 유저에게 role 부여 (현재는 기본적으로 ROLE_USER로 고정)
+                String accessToken = JwtUtil.generateToken(user.getUsername(), "ROLE_USER");
                 String refreshToken = UUID.randomUUID().toString();
+
                 refreshTokenService.saveRefreshToken(user.getUsername(), refreshToken);
 
-                //  토큰 포함해서 응 답 반환
-                return new LoginResponseDto(user.getUsername(), user.getName(), "Login successful", accessToken,refreshToken);
+                return new LoginResponseDto(
+                        user.getUsername(),
+                        user.getName(),
+                        "Login successful",
+                        accessToken,
+                        refreshToken
+                );
             }
         }
 
-        //로그인 실패 시
         throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Invalid username or password");
     }
 
     public void logoutUser(HttpSession session) {
-        session.invalidate(); // 세션 무효화 (로그아웃)
+        session.invalidate();
     }
 }
