@@ -25,7 +25,7 @@ public class SecurityConfig {
                 .formLogin(form -> form.disable())
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/auth/register", "/auth/login", "/auth/logout","/auth/refresh").permitAll()
-                        .requestMatchers("/api/protected").authenticated()
+                        .requestMatchers("/board/**").authenticated()
                         .anyRequest().authenticated()
                 )
                 .addFilterBefore(new JwtAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class); // 필터 추가는 이 줄에서 끝나야 함
