@@ -10,7 +10,7 @@ public class BoardCreateRequestDto {
     private String size;
     private String sex;
     private String place;
-    private Number price;
-    private Number date;
+    private int price;
+    private int date;
     private String category;
 }

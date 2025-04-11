@@ -1,10 +1,7 @@
 package DevFlow.OpenCloset_Back.Board.entity;
 
 import DevFlow.OpenCloset_Back.Board.dto.req.BoardCreateRequestDto;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.EntityListeners;
-import jakarta.persistence.OneToOne;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.CreatedDate;
@@ -17,7 +14,12 @@ import java.time.LocalDateTime;
 @Entity
 @EntityListeners(AuditingEntityListener.class)
 @NoArgsConstructor
-public class Board extends Gener { //게시물 id
+public class Board { //게시물 id
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
     @Column(nullable = false)
     private String title;   //제목
 
@@ -37,10 +39,10 @@ public class Board extends Gener { //게시물 id
     private String place;   //거래 장소
 
     @Column(nullable = false)
-    private Number price;
+    private int price;
 
     @Column(nullable = false)
-    private Number date;
+    private int date;
 
     @Column(nullable = false)
     private String category;
