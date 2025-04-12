@@ -8,7 +8,7 @@ import DevFlow.OpenCloset_Back.Board.dto.req.BoardCreateRequestDto;
 import DevFlow.OpenCloset_Back.Board.dto.res.BoardCreateResponsetDto;
 import DevFlow.OpenCloset_Back.Board.entity.Board;
 import DevFlow.OpenCloset_Back.Board.entity.Bottom;
-import DevFlow.OpenCloset_Back.Board.entity.Outer;
+import DevFlow.OpenCloset_Back.Board.entity.Outer_;
 import DevFlow.OpenCloset_Back.Board.entity.Top;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -49,10 +49,10 @@ public class BoardService {
             bottomRepository.save(bottom);
         }
         if (req.getCategory().equals("outer")){ //outer
-            Outer outer = new Outer(board);
+            Outer_ outer = new Outer_(board);
             outerRepository.save(outer);
         }
-        
+
         return new BoardCreateResponsetDto(board);
     }
     @Transactional

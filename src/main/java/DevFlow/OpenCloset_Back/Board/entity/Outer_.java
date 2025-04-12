@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 @Getter
 @NoArgsConstructor
 @Entity
-public class Outer {
+public class Outer_ {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -16,7 +16,7 @@ public class Outer {
     @JoinColumn(name = "board_id", unique = true)
     private Board board;
 
-    public Outer(Board board) {
+    public Outer_(Board board) {
         this.board = board;
     }
 }
