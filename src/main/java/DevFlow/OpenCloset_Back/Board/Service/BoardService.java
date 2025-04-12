@@ -35,4 +35,6 @@ public class BoardService {
                 () -> new IllegalArgumentException("아이디가 존재하지않습니다.")
         );
     }
+
+
 }

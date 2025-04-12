@@ -1,6 +1,7 @@
 package DevFlow.OpenCloset_Back.Login.JwtAuthenticationFilter;
 
 import DevFlow.OpenCloset_Back.Login.Jwt_Util.JwtUtil;
+import DevFlow.OpenCloset_Back.Security.CustomUserDetailsService;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -15,7 +16,11 @@ import java.io.IOException;
 
 @Component
 public class JwtAuthenticationFilter extends OncePerRequestFilter {
+    private final CustomUserDetailsService customUserDetailsService;
 
+    public JwtAuthenticationFilter(CustomUserDetailsService customUserDetailsService) {
+        this.customUserDetailsService = customUserDetailsService;
+    }
     // JwtUtil 메서드들은 static으로 만들었기 때문에 바로 사용 가능
     @Override
     protected void doFilterInternal(HttpServletRequest request,
@@ -38,6 +43,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         // 인증이 안 되어 있으면 인증 객체 생성
         if (username != null && SecurityContextHolder.getContext().getAuthentication() == null) {
             if (JwtUtil.validateToken(token)) {
+                var userDetails = customUserDetailsService.loadUserByUsername(username);
 
                 UsernamePasswordAuthenticationToken authentication =
                         new UsernamePasswordAuthenticationToken(username, null, null);
