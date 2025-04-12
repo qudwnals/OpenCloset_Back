@@ -4,6 +4,8 @@ import DevFlow.OpenCloset_Back.Board.entity.Board;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDateTime;
+
 @Getter
 @NoArgsConstructor
 public class BoardCreateResponsetDto {
@@ -12,8 +14,12 @@ public class BoardCreateResponsetDto {
     private String description;
     private String image;
     private String size;
-    private Boolean sex;
+    private String sex;
     private String place;
+    private int date;
+    private String category;
+    private int price;
+    private LocalDateTime createAt;
 
     public BoardCreateResponsetDto(Board entity) {
         this.id = entity.getId();
@@ -21,7 +27,11 @@ public class BoardCreateResponsetDto {
         this.description = entity.getDescription();
         this.image = entity.getImage();
         this.size = entity.getSize();
-//        this.sex = entity.getSex();
+        this.sex = entity.getSex();
         this.place = entity.getPlace();
+        this.category =entity.getCategory();
+        this.date = entity.getDate();
+        this.price = entity.getPrice();
+        this.createAt = entity.getCreatedAt();
     }
 }
