@@ -19,17 +19,26 @@ public class SearchService {
     }
 
     public List<BoardSearchResponseDto> searchBoards(BoardSearchRequestDto req) {
+        System.out.println("title: '" + req.getTitle() + "'");
+        System.out.println("desc : '" + req.getDescription() + "'");
+        System.out.println("sex: '" + req.getSex() + "'");
+        System.out.println("size: '" + req.getSize() + "'");
+        System.out.println("place: '" + req.getPlace() + "'");
+
         List<Board> results = boardRepository.searchBoards(
-                req.getTitle(),
-                req.getDescription(),
-                req.getSex(),
-                req.getSize(),
-                req.getPlace()
+                emptyToNull(req.getTitle()),
+                emptyToNull(req.getDescription()),
+                emptyToNull(req.getSex()),
+                emptyToNull(req.getSize()),
+                emptyToNull(req.getPlace())
         );
 
         return results.stream()
                 .map(BoardSearchResponseDto::new)
                 .toList();
+    }
+    private String emptyToNull(String input) {
+        return (input == null || input.trim().isEmpty() || input.equalsIgnoreCase("null")) ? null : input;
     }
 
 }
