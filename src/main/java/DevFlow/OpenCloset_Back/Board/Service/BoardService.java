@@ -17,13 +17,15 @@ public class BoardService {
     private final BottomRepository bottomRepository;
     private final OuterRepository outerRepository;
     private final JewelryRepossitory jewelryRepossitory;
+    private final One_pieceRepository onePieceRepository;
 
-    public BoardService(BoardRepository boardRepository, TopRepository topRepository, BottomRepository bottomRepository, OuterRepository outerRepository, JewelryRepossitory jewelryRepossitory) {
+    public BoardService(BoardRepository boardRepository, TopRepository topRepository, BottomRepository bottomRepository, OuterRepository outerRepository, JewelryRepossitory jewelryRepossitory, One_pieceRepository onePieceRepository) {
         this.boardRepository = boardRepository;
         this.topRepository = topRepository;
         this.bottomRepository = bottomRepository;
         this.outerRepository = outerRepository;
         this.jewelryRepossitory = jewelryRepossitory;
+        this.onePieceRepository = onePieceRepository;
     }
 
     @Transactional(readOnly = true)
@@ -51,6 +53,10 @@ public class BoardService {
         if (req.getCategory().equals("jewelry")){   //주얼리
             Jewelry jewelry = new Jewelry(board);
             jewelryRepossitory.save(jewelry);
+        }
+        if (req.getCategory().equals("one piece")){   //원피스
+            One_Piece one_piece = new One_Piece(board);
+            onePieceRepository.save(one_piece);
         }
 
         return new BoardCreateResponsetDto(board);
