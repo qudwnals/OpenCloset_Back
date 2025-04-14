@@ -1,15 +1,9 @@
 package DevFlow.OpenCloset_Back.Board.Service;
 
-import DevFlow.OpenCloset_Back.Board.Repository.BoardRepository;
-import DevFlow.OpenCloset_Back.Board.Repository.BottomRepository;
-import DevFlow.OpenCloset_Back.Board.Repository.OuterRepository;
-import DevFlow.OpenCloset_Back.Board.Repository.TopRepository;
+import DevFlow.OpenCloset_Back.Board.Repository.*;
 import DevFlow.OpenCloset_Back.Board.dto.req.BoardCreateRequestDto;
 import DevFlow.OpenCloset_Back.Board.dto.res.BoardCreateResponsetDto;
-import DevFlow.OpenCloset_Back.Board.entity.Board;
-import DevFlow.OpenCloset_Back.Board.entity.Bottom;
-import DevFlow.OpenCloset_Back.Board.entity.Outer_;
-import DevFlow.OpenCloset_Back.Board.entity.Top;
+import DevFlow.OpenCloset_Back.Board.entity.*;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -22,12 +16,14 @@ public class BoardService {
     private final TopRepository topRepository;
     private final BottomRepository bottomRepository;
     private final OuterRepository outerRepository;
+    private final JewelryRepossitory jewelryRepossitory;
 
-    public BoardService(BoardRepository boardRepository, TopRepository topRepository, BottomRepository bottomRepository, OuterRepository outerRepository) {
+    public BoardService(BoardRepository boardRepository, TopRepository topRepository, BottomRepository bottomRepository, OuterRepository outerRepository, JewelryRepossitory jewelryRepossitory) {
         this.boardRepository = boardRepository;
         this.topRepository = topRepository;
         this.bottomRepository = bottomRepository;
         this.outerRepository = outerRepository;
+        this.jewelryRepossitory = jewelryRepossitory;
     }
 
     @Transactional(readOnly = true)
@@ -48,9 +44,13 @@ public class BoardService {
             Bottom bottom = new Bottom(board);
             bottomRepository.save(bottom);
         }
-        if (req.getCategory().equals("outer")){ //outer
+        if (req.getCategory().equals("outer")){     //아우터
             Outer_ outer = new Outer_(board);
             outerRepository.save(outer);
+        }
+        if (req.getCategory().equals("jewelry")){   //주얼리
+            Jewelry jewelry = new Jewelry(board);
+            jewelryRepossitory.save(jewelry);
         }
 
         return new BoardCreateResponsetDto(board);
