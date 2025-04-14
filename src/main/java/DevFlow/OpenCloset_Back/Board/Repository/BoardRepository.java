@@ -13,16 +13,14 @@ public interface BoardRepository extends JpaRepository<Board, Long> {
     List<Board> findAllByOrderByModifiedAtDesc();
 
     @Query("SELECT b FROM Board b " +
-            "WHERE (:title IS NULL OR b.title LIKE %:title%) " +
-            "AND (:description IS NULL OR b.description LIKE %:description%) " +
-            "AND (:sex IS NULL OR b.sex = :sex) " +
+            "WHERE (:title IS NULL OR LOWER(b.title) LIKE LOWER(CONCAT('%', :title, '%'))) " +
+            "AND (:description IS NULL OR LOWER(b.description) LIKE LOWER(CONCAT('%', :description, '%'))) " +
             "AND (:size IS NULL OR b.size = :size) " +
-            "AND (:place IS NULL OR b.place LIKE %:place%) " +
+            "AND (:place IS NULL OR LOWER(b.place) LIKE LOWER(CONCAT('%', :place, '%'))) " +
             "ORDER BY b.createdAt DESC")
     List<Board> searchBoards(
             @Param("title") String title,
             @Param("description") String description,
-            @Param("sex") String sex,
             @Param("size") String size,
             @Param("place") String place
     );

@@ -21,24 +21,33 @@ public class SearchService {
     public List<BoardSearchResponseDto> searchBoards(BoardSearchRequestDto req) {
         System.out.println("title: '" + req.getTitle() + "'");
         System.out.println("desc : '" + req.getDescription() + "'");
-        System.out.println("sex: '" + req.getSex() + "'");
+        //System.out.println("sex: '" + req.getSex() + "'");
         System.out.println("size: '" + req.getSize() + "'");
         System.out.println("place: '" + req.getPlace() + "'");
 
-        List<Board> results = boardRepository.searchBoards(
-                emptyToNull(req.getTitle()),
-                emptyToNull(req.getDescription()),
-                emptyToNull(req.getSex()),
-                emptyToNull(req.getSize()),
-                emptyToNull(req.getPlace())
-        );
+        try {
+            List<Board> results = boardRepository.searchBoards(
+                    emptyToNull(req.getTitle()),
+                    emptyToNull(req.getDescription()),
+                    emptyToNull(req.getSize()),
+                    emptyToNull(req.getPlace())
+            );
 
-        return results.stream()
-                .map(BoardSearchResponseDto::new)
-                .toList();
+            System.out.println("검색 결과 개수: " + results.size());
+
+            return results.stream()
+                    .map(BoardSearchResponseDto::new)
+                    .toList();
+        } catch (Exception e) {
+            System.out.println("오류 발생: " + e.getMessage());
+            e.printStackTrace(); // 어디서 터지는지 확인용
+            return List.of(); // 빈 리스트라도 반환
+        }
     }
     private String emptyToNull(String input) {
-        return (input == null || input.trim().isEmpty() || input.equalsIgnoreCase("null")) ? null : input;
+        if (input == null) return null;
+        input = input.trim();
+        return (input.isEmpty() || input.equalsIgnoreCase("null")) ? null : input;
     }
 
 }

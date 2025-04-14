@@ -11,13 +11,14 @@ import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 
 @Getter
 @Entity
 @EntityListeners(AuditingEntityListener.class)
 @NoArgsConstructor
-public class Board extends Gener { //게시물 id
+public class Board extends Gener implements Serializable { //게시물 id
     @Column(nullable = false)
     private String title;   //제목
 
@@ -37,10 +38,10 @@ public class Board extends Gener { //게시물 id
     private String place;   //거래 장소
 
     @Column(nullable = false)
-    private Number price;
+    private Long price;
 
     @Column(nullable = false)
-    private Number date;
+    private Integer date;
 
     @Column(nullable = false)
     private String category;

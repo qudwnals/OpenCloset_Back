@@ -20,8 +20,8 @@ public class BoardSearchResponseDto {
     public BoardSearchResponseDto(Board board) {
         this.id = board.getId();
         this.name = board.getTitle();
-        this.rentalPeriod = board.getDate().intValue();
-        this.rentalCost = board.getPrice().intValue();
+        this.rentalPeriod = board.getDate() != null ? board.getDate().intValue() : 0;
+        this.rentalCost = board.getPrice() != null ? board.getPrice().intValue() : 0;
         this.location = board.getPlace();
         this.imageUrl = board.getImage();
         this.createdAt = board.getCreatedAt();

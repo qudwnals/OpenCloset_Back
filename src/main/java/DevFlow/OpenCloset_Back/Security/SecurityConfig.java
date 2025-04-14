@@ -49,7 +49,7 @@ public class SecurityConfig {
                 .csrf(csrf -> csrf.disable()) // CSRF 비활성화
                 .formLogin(form -> form.disable())
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/auth/register", "/auth/login", "/auth/logout","/auth/refresh","/search/**").permitAll()
+                        .requestMatchers("/auth/register", "/auth/login", "/auth/logout","/auth/refresh","/search").permitAll()
                         .requestMatchers("/board/**").authenticated()
                         .anyRequest().authenticated()
                 )
