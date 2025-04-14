@@ -1,10 +1,7 @@
 package DevFlow.OpenCloset_Back.Board.entity;
 
 import DevFlow.OpenCloset_Back.Board.dto.req.BoardCreateRequestDto;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.EntityListeners;
-import jakarta.persistence.OneToOne;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.CreatedDate;
@@ -18,7 +15,10 @@ import java.time.LocalDateTime;
 @Entity
 @EntityListeners(AuditingEntityListener.class)
 @NoArgsConstructor
-public class Board extends Gener implements Serializable { //게시물 id
+public class Board implements Serializable { //게시물 id
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
     @Column(nullable = false)
     private String title;   //제목
 
@@ -63,6 +63,4 @@ public class Board extends Gener implements Serializable { //게시물 id
         this.date = req.getDate();
         this.category = req.getCategory();
     }
-    //회원아이디에 해당하는 FK값도 넣어야함. (회원 로직 구현 시) , 회원의 이름을 알기 위해서
-    //카테고리에 해당하는 FK값 넣어야함. (아마도..?)
 }
