@@ -18,14 +18,16 @@ public class BoardService {
     private final OuterRepository outerRepository;
     private final JewelryRepossitory jewelryRepossitory;
     private final One_pieceRepository onePieceRepository;
+    private final ShoesRepository shoesRepository;
 
-    public BoardService(BoardRepository boardRepository, TopRepository topRepository, BottomRepository bottomRepository, OuterRepository outerRepository, JewelryRepossitory jewelryRepossitory, One_pieceRepository onePieceRepository) {
+    public BoardService(BoardRepository boardRepository, TopRepository topRepository, BottomRepository bottomRepository, OuterRepository outerRepository, JewelryRepossitory jewelryRepossitory, One_pieceRepository onePieceRepository, ShoesRepository shoesRepository) {
         this.boardRepository = boardRepository;
         this.topRepository = topRepository;
         this.bottomRepository = bottomRepository;
         this.outerRepository = outerRepository;
         this.jewelryRepossitory = jewelryRepossitory;
         this.onePieceRepository = onePieceRepository;
+        this.shoesRepository = shoesRepository;
     }
 
     @Transactional(readOnly = true)
@@ -57,6 +59,10 @@ public class BoardService {
         if (req.getCategory().equals("one piece")){   //원피스
             One_Piece one_piece = new One_Piece(board);
             onePieceRepository.save(one_piece);
+        }
+        if (req.getCategory().equals("shoes")){
+            Shoes shoes = new Shoes();
+            shoesRepository.save(shoes);
         }
 
         return new BoardCreateResponsetDto(board);
