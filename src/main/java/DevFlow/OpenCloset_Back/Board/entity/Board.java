@@ -1,25 +1,24 @@
 package DevFlow.OpenCloset_Back.Board.entity;
 
 import DevFlow.OpenCloset_Back.Board.dto.req.BoardCreateRequestDto;
-import jakarta.persistence.*;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.EntityListeners;
+import jakarta.persistence.OneToOne;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 
 @Getter
 @Entity
 @EntityListeners(AuditingEntityListener.class)
 @NoArgsConstructor
-public class Board { //게시물 id
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
+public class Board extends Gener implements Serializable { //게시물 id
     @Column(nullable = false)
     private String title;   //제목
 
@@ -39,10 +38,10 @@ public class Board { //게시물 id
     private String place;   //거래 장소
 
     @Column(nullable = false)
-    private int price;
+    private Long price;
 
     @Column(nullable = false)
-    private int date;
+    private Integer date;
 
     @Column(nullable = false)
     private String category;

@@ -1,9 +1,16 @@
 package DevFlow.OpenCloset_Back.Board.Service;
 
+<<<<<<< HEAD
 import DevFlow.OpenCloset_Back.Board.Repository.*;
 import DevFlow.OpenCloset_Back.Board.dto.req.BoardCreateRequestDto;
 import DevFlow.OpenCloset_Back.Board.dto.res.BoardCreateResponsetDto;
 import DevFlow.OpenCloset_Back.Board.entity.*;
+=======
+import DevFlow.OpenCloset_Back.Board.Repository.BoardRepository;
+import DevFlow.OpenCloset_Back.Board.dto.req.BoardCreateRequestDto;
+import DevFlow.OpenCloset_Back.Board.dto.res.BoardCreateResponsetDto;
+import DevFlow.OpenCloset_Back.Board.entity.Board;
+>>>>>>> origin/bang-part
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -13,6 +20,7 @@ import java.util.List;
 public class BoardService {
 
     private final BoardRepository boardRepository;
+<<<<<<< HEAD
     private final TopRepository topRepository;
     private final BottomRepository bottomRepository;
     private final OuterRepository outerRepository;
@@ -28,6 +36,11 @@ public class BoardService {
         this.jewelryRepossitory = jewelryRepossitory;
         this.onePieceRepository = onePieceRepository;
         this.shoesRepository = shoesRepository;
+=======
+
+    public BoardService(BoardRepository boardRepository) {
+        this.boardRepository = boardRepository;
+>>>>>>> origin/bang-part
     }
 
     @Transactional(readOnly = true)
@@ -39,6 +52,7 @@ public class BoardService {
     public BoardCreateResponsetDto createBoard(BoardCreateRequestDto req){
         Board board = new Board(req);
         boardRepository.save(board);
+<<<<<<< HEAD
 
         if (req.getCategory().equals("top")){   //상의
             Top top = new Top(board);
@@ -65,6 +79,8 @@ public class BoardService {
             shoesRepository.save(shoes);
         }
 
+=======
+>>>>>>> origin/bang-part
         return new BoardCreateResponsetDto(board);
     }
     @Transactional
@@ -73,4 +89,6 @@ public class BoardService {
                 () -> new IllegalArgumentException("아이디가 존재하지않습니다.")
         );
     }
+
+
 }

@@ -27,7 +27,11 @@ public class BoardCreateResponsetDto {
         this.description = entity.getDescription();
         this.image = entity.getImage();
         this.size = entity.getSize();
+<<<<<<< HEAD
         this.sex = entity.getSex();
+=======
+      // this.sex = entity.getSex();
+>>>>>>> origin/bang-part
         this.place = entity.getPlace();
         this.category =entity.getCategory();
         this.date = entity.getDate();
