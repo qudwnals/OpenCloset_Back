@@ -8,7 +8,6 @@
 .vscode/
 
 # 빌드 결과물
-build/
 out/
 *.class
 
