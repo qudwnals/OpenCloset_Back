@@ -28,32 +28,38 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
                                     FilterChain filterChain)
             throws ServletException, IOException {
 
+        String requestURI = request.getRequestURI();
+
+        // 인증이 필요 없는 경로는 필터 적용하지 않음
+        if (requestURI.startsWith("/auth")
+                || requestURI.startsWith("/search")
+                || requestURI.startsWith("/api")) {
+            filterChain.doFilter(request, response);
+            return;
+        }
+
         String authHeader = request.getHeader("Authorization");
 
-        // Authorization 헤더가 없거나 "Bearer "로 시작하지 않으면 다음 필터로
         if (authHeader == null || !authHeader.startsWith("Bearer ")) {
             filterChain.doFilter(request, response);
             return;
         }
 
-        // 토큰 추출
         String token = authHeader.substring(7); // "Bearer " 이후 토큰만 추출
         String username = JwtUtil.extractUsername(token); // 토큰에서 username 추출
 
-        // 인증이 안 되어 있으면 인증 객체 생성
         if (username != null && SecurityContextHolder.getContext().getAuthentication() == null) {
             if (JwtUtil.validateToken(token)) {
                 var userDetails = customUserDetailsService.loadUserByUsername(username);
 
                 UsernamePasswordAuthenticationToken authentication =
-                        new UsernamePasswordAuthenticationToken(username, null, null);
+                        new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
                 authentication.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
 
-                // SecurityContext에 인증 정보 저장
                 SecurityContextHolder.getContext().setAuthentication(authentication);
             }
         }
 
-        filterChain.doFilter(request, response); // 다음 필터로 이동
+        filterChain.doFilter(request, response);
     }
 }
