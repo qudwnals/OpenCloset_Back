@@ -1,13 +1,12 @@
 package DevFlow.OpenCloset_Back.Board.dto.res;
 
-import DevFlow.OpenCloset_Back.Board.entity.Board;
 import DevFlow.OpenCloset_Back.Board.entity.Top;
 import lombok.Getter;
 
 import java.time.LocalDateTime;
 
 @Getter
-public class BoardTopsResponseDto {
+public class TopsResponseDto {
     private Long id;
     private String title;
     private String description;
@@ -20,7 +19,7 @@ public class BoardTopsResponseDto {
     private Long price;
     private LocalDateTime createAt;
 
-    public BoardTopsResponseDto(Top top) {
+    public TopsResponseDto(Top top) {
         this.id = top.getBoard().getId();
         this.title = top.getBoard().getTitle();
         this.description = top.getBoard().getDescription();
