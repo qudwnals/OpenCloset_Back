@@ -3,6 +3,7 @@ package DevFlow.OpenCloset_Back.Board.Controller;
 import DevFlow.OpenCloset_Back.Board.Service.BoardService;
 import DevFlow.OpenCloset_Back.Board.dto.req.BoardCreateRequestDto;
 import DevFlow.OpenCloset_Back.Board.dto.res.BoardCreateResponsetDto;
+import DevFlow.OpenCloset_Back.Board.dto.res.BottomsReponseDto;
 import DevFlow.OpenCloset_Back.Board.dto.res.TopsResponseDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
@@ -32,5 +33,9 @@ public class BoardController {
     @GetMapping("/top")
     public List<TopsResponseDto> getTops(){
         return boardService.getTops();
+    }
+    @GetMapping("/bottom")
+    public List<BottomsReponseDto> getBottoms(){
+        return boardService.getBottoms();
     }
 }
