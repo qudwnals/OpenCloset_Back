@@ -2,16 +2,17 @@ package DevFlow.OpenCloset_Back.Board.Service;
 import DevFlow.OpenCloset_Back.Board.Repository.*;
 import DevFlow.OpenCloset_Back.Board.dto.req.BoardCreateRequestDto;
 import DevFlow.OpenCloset_Back.Board.dto.res.BoardCreateResponsetDto;
+import DevFlow.OpenCloset_Back.Board.dto.res.BoardTopsResponseDto;
 import DevFlow.OpenCloset_Back.Board.entity.*;
 import DevFlow.OpenCloset_Back.Board.Repository.BoardRepository;
-import DevFlow.OpenCloset_Back.Board.dto.req.BoardCreateRequestDto;
-import DevFlow.OpenCloset_Back.Board.dto.res.BoardCreateResponsetDto;
 import DevFlow.OpenCloset_Back.Board.entity.Board;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
+@RequiredArgsConstructor
 @Service
 public class BoardService {
 
@@ -24,19 +25,16 @@ public class BoardService {
     private final ShoesRepository shoesRepository;
 
 
-    public BoardService(BoardRepository boardRepository, TopRepository topRepository, BottomRepository bottomRepository, OuterRepository outerRepository, JewelryRepossitory jewelryRepossitory, One_pieceRepository onePieceRepository, ShoesRepository shoesRepository) {
-        this.boardRepository = boardRepository;
-        this.topRepository = topRepository;
-        this.bottomRepository = bottomRepository;
-        this.outerRepository = outerRepository;
-        this.jewelryRepossitory = jewelryRepossitory;
-        this.onePieceRepository = onePieceRepository;
-        this.shoesRepository = shoesRepository;
-    }
-
-        @Transactional(readOnly = true)
+    @Transactional(readOnly = true)
         public List<BoardCreateResponsetDto> getPosts () {
             return boardRepository.findAllByOrderByModifiedAtDesc().stream().map(BoardCreateResponsetDto::new).toList();
+        }
+
+        @Transactional(readOnly = true)
+        public List<BoardTopsResponseDto> getTops() {
+        return topRepository.findAll().stream()
+                .map(BoardTopsResponseDto::new)
+                .toList();
         }
 
         @Transactional
@@ -65,7 +63,7 @@ public class BoardService {
                 onePieceRepository.save(one_piece);
             }
             if (req.getCategory().equals("shoes")) {
-                Shoes shoes = new Shoes();
+                Shoes shoes = new Shoes(board);
                 shoesRepository.save(shoes);
             }
 

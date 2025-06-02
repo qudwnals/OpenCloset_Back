@@ -28,7 +28,6 @@ public class BoardCreateResponsetDto {
         this.image = entity.getImage();
         this.size = entity.getSize();
         this.sex = entity.getSex();
-      // this.sex = entity.getSex();
         this.place = entity.getPlace();
         this.category =entity.getCategory();
         this.date = entity.getDate();
