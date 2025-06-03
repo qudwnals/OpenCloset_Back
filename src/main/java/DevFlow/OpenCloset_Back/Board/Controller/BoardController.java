@@ -48,4 +48,8 @@ public class BoardController {
     public List<JewelryResponseDto> getJewelry(){
         return boardService.getJewelry();
     }
+    @GetMapping("/shoes")
+    public List<ShoesResponseDto> get(){
+        return boardService.getShoes();
+    }
 }

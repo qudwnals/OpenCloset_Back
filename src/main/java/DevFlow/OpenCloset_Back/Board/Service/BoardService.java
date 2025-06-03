@@ -61,6 +61,12 @@ public class BoardService {
                     .map(JewelryResponseDto::new)
                     .toList();
         }
+        @Transactional(readOnly = true)
+        public List<ShoesResponseDto> getShoes() {
+            return shoesRepository.findAll().stream()
+                    .map(ShoesResponseDto::new)
+                    .toList();
+        }
 
         @Transactional
         public BoardCreateResponsetDto createBoard (BoardCreateRequestDto req){
