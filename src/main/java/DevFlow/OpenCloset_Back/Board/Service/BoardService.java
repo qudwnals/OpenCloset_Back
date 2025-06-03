@@ -1,10 +1,7 @@
 package DevFlow.OpenCloset_Back.Board.Service;
 import DevFlow.OpenCloset_Back.Board.Repository.*;
 import DevFlow.OpenCloset_Back.Board.dto.req.BoardCreateRequestDto;
-import DevFlow.OpenCloset_Back.Board.dto.res.BoardCreateResponsetDto;
-import DevFlow.OpenCloset_Back.Board.dto.res.BottomsReponseDto;
-import DevFlow.OpenCloset_Back.Board.dto.res.OutherResponseDto;
-import DevFlow.OpenCloset_Back.Board.dto.res.TopsResponseDto;
+import DevFlow.OpenCloset_Back.Board.dto.res.*;
 import DevFlow.OpenCloset_Back.Board.entity.*;
 import DevFlow.OpenCloset_Back.Board.Repository.BoardRepository;
 import DevFlow.OpenCloset_Back.Board.entity.Board;
@@ -50,6 +47,12 @@ public class BoardService {
         public List<OutherResponseDto> getOuters() {
             return outerRepository.findAll().stream()
                     .map(OutherResponseDto::new)
+                    .toList();
+        }
+        @Transactional(readOnly = true)
+        public List<One_pieceResponseDto> getOnePieces() {
+            return onePieceRepository.findAll().stream()
+                    .map(One_pieceResponseDto::new)
                     .toList();
         }
 
