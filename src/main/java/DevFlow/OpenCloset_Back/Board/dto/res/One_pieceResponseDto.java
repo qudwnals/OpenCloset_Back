@@ -1,9 +1,11 @@
 package DevFlow.OpenCloset_Back.Board.dto.res;
 
 import DevFlow.OpenCloset_Back.Board.entity.One_Piece;
+import lombok.Getter;
 
 import java.time.LocalDateTime;
 
+@Getter
 public class One_pieceResponseDto {
     private Long id;
     private String title;

@@ -39,8 +39,13 @@ public class BoardController {
     @GetMapping("/outher")
     public List<OutherResponseDto> getOuter(){
         return boardService.getOuters();
-    }@GetMapping("/onepiece")
+    }
+    @GetMapping("/onepiece")
     public List<One_pieceResponseDto> getOnePieces(){
         return boardService.getOnePieces();
+    }
+    @GetMapping("/jewelry")
+    public List<JewelryResponseDto> getJewelry(){
+        return boardService.getJewelry();
     }
 }
