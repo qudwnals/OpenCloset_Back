@@ -49,7 +49,7 @@ public class BoardController {
         return boardService.getJewelry();
     }
     @GetMapping("/shoes")
-    public List<ShoesResponseDto> get(){
+    public List<ShoesResponseDto> getShoes(){
         return boardService.getShoes();
     }
 }
