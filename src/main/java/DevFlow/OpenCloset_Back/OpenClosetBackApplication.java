@@ -11,7 +11,7 @@ public class OpenClosetBackApplication {
 	public static void main(String[] args) {
 
 		SpringApplication.run(OpenClosetBackApplication.class, args);
-		//잠깐 커밋 테스트
+		//다시 테스트
 	}
 
 }
