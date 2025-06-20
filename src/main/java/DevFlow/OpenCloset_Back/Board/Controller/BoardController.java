@@ -40,7 +40,7 @@ public class BoardController {
         }
     }
 
-    @PostMapping("/board/create")
+    @PostMapping("/create")
     public BoardCreateResponsetDto createBoard(@RequestBody BoardCreateRequestDto requestDto, @AuthenticationPrincipal UserDetails userDetails) {
 
         String username = userDetails.getUsername();
