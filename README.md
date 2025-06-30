@@ -16,4 +16,5 @@ OpenCloset 어플리케이션은 P2P 사용자 주소 기반 서비스를 통해
 <img width="377" alt="image" src="https://github.com/user-attachments/assets/d6007709-2125-4d3c-a326-676e56c0747d" /><img width="480" alt="image" src="https://github.com/user-attachments/assets/16174cca-8816-49cc-92e6-f82f48b89f8d" />
 
 
-버려지는 의류로 인한 환경 문제 중고거래 사기로 인한 사례와 20대 대학생들에게 중고의류  했을때 떠오르는 키워드를 통한 조사를 통해 직거래,위치 기반,대여 기능 목표 어플리케이션 설계하였다.
+버려지는 의류로 인한 환경 문제 및 중고거래 사기로 인한 사례와 20대 대학생들에게 중고의류 키워드만 질문 했을때 떠오르는 
+키워드를 통한 조사를 통해 직거래,위치 기반,대여 기능 목표 어플리케이션 설계하였다.
